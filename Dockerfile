@@ -2,12 +2,14 @@ FROM centos
 
 
 RUN yum update -y
-RUN yum install -y curl which wget ntp ntpdate ntp-doc unzip system-config-services
+RUN yum install -y curl which wget ntp ntpdate ntp-doc unzip system-config-services net-tools
 
 
 WORKDIR /install
 
 ADD install-centos.sh /install
+
+RUN systemctl disable firewalld
 RUN bash /install/install-centos.sh
 
 # http
